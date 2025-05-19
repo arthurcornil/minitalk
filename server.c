@@ -6,22 +6,16 @@
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:14:14 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/19 17:50:27 by arcornil         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:40:33 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-typedef struct	s_byte
-{
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
-
 void	receive_bit(int sig)
 {
-	static t_byte	received_char = (t_byte){ 0, 0 };
-	
+	static t_byte	received_char = (t_byte){0, 0};
+
 	received_char.byte = received_char.byte << 1;
 	if (sig == SIGUSR2)
 		received_char.byte = (received_char.byte | 1);

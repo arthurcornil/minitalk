@@ -6,7 +6,7 @@
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:25:28 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/19 17:55:05 by arcornil         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:41:04 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	main(int argc, char **argv)
 	server_pid = ft_atoi(argv[1]);
 	while (*argv[2])
 	{
-		if(!send_char(server_pid, *argv[2]))
+		if (!send_char(server_pid, *argv[2]))
 		{
 			ft_putstr_fd(2, "Error: The message couldn't reach the server.");
 			return (1);
 		}
-		argv[2] ++;
+		argv[2]++;
 	}
 	return (0);
 }

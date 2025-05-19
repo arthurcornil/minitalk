@@ -6,7 +6,7 @@
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:19:30 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/19 17:54:36 by arcornil         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:41:24 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putstr_fd(int fd, char *str)
 	len = 0;
 	while (str[len])
 		len ++;
-	 write(fd, str, len);
+	write(fd, str, len);
 }
 
 int	ft_atoi(const char *str)
@@ -49,4 +49,3 @@ int	ft_atoi(const char *str)
 	}
 	return (result);
 }
-
