@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/19 17:19:44 by arcornil         ###   ########.fr       */
+/*   Created: 2025/05/19 17:19:30 by arcornil          #+#    #+#             */
+/*   Updated: 2025/05/19 17:19:37 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "minitalk.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
+void	ft_putstr_fd(int fd, char *str)
+{
+	size_t	len;
 
-void	ft_putstr_fd(int fd, char *str);
+	len = 0;
+	while (str[len])
+		len ++;
+	 write(fd, str, len);
+}
 
-#endif

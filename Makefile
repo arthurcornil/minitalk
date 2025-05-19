@@ -11,5 +11,5 @@ NAME=minitalk
 $(NAME): all
 
 all:
-	$(CC) $(CFLAGS) $(SERVER_SRCS) -o server
-	$(CC) $(CFLAGS) $(CLIENT_SRCS) -o client
+	$(CC) $(CFLAGS) $(SERVER_SRCS) utils.c -o server
+	$(CC) $(CFLAGS) $(CLIENT_SRCS) utils.c -o client

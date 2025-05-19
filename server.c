@@ -6,27 +6,50 @@
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:14:14 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/18 21:08:27 by arcornil         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:50:27 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handle_sig(pid_t sig)
+typedef struct	s_byte
 {
-	printf("%d\n", sig);
+	unsigned char	byte;
+	size_t			curr_bit;
+}	t_byte;
+
+void	receive_bit(int sig)
+{
+	static t_byte	received_char = (t_byte){ 0, 0 };
+	
+	received_char.byte = received_char.byte << 1;
+	if (sig == SIGUSR2)
+		received_char.byte = (received_char.byte | 1);
+	received_char.curr_bit ++;
+	if (received_char.curr_bit == sizeof(char) * CHAR_BIT)
+	{
+		write(1, &received_char.byte, 1);
+		received_char.byte = 0;
+		received_char.curr_bit = 0;
+	}
 }
 
 int	main(void)
 {
-	pid_t	pid;
+	pid_t				pid;
+	unsigned char		received_char;
+	struct sigaction	sa;
 
+	(void)received_char;
 	pid = getpid();
-	printf("%d\n", pid);
+	sa.sa_handler = receive_bit;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	received_char = 0;
+	printf("SERVER PID: %d\n", pid);
 	while (true)
-	{
 		sleep(1);
-		signal(SIGUSR1, handle_sig);
-	}
 	return (0);
 }
