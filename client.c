@@ -34,7 +34,7 @@ bool	send_char(pid_t pid, char c)
 		if (ret < 0)
 			return (false);
 		while (!g_bit_ack)
-			usleep(42);
+			pause();
 		mask = mask >> 1;
 		i --;
 	}

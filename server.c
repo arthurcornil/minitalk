@@ -18,10 +18,7 @@ void	receive_bit(int sig, siginfo_t *info, void *context)
 
 	(void)context;
 	if (info->si_pid <= 0)
-	{
-		ft_putstr_fd(1, "wtf\n");
 		return ;
-	}
 	received_char.byte <<= 1;
 	if (sig == SIGUSR2)
 		received_char.byte |= 1;
