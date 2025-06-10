@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/03/27 07:34:01 by arcornil          #+#    #+#             */
+/*   Updated: 2025/03/27 07:40:19 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+int	ft_isascii(int c)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
-
-int		ft_atoi(const char *str);
-
-#endif
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
+}

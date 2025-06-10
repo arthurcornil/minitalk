@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/03/27 14:26:47 by arcornil          #+#    #+#             */
+/*   Updated: 2025/03/27 14:32:22 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	size_t	len_s1;
+	size_t	len_s2;
+	char	*str;
 
-int		ft_atoi(const char *str);
-
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	str = malloc((len_s1 + len_s2 + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, s1, len_s1);
+	ft_memcpy(str + len_s1, s2, len_s2);
+	str[len_s1 + len_s2] = 0;
+	return (str);
+}

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/03/27 08:33:39 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/10 13:12:51 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+char	*ft_strchr(const char *s, int c)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
-
-int		ft_atoi(const char *str);
-
-#endif
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s ++;
+	}
+	if (*s == (char)c)
+		return ((char *)s);
+	return (NULL);
+}

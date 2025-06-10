@@ -51,7 +51,7 @@ int	main(void)
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	printf("SERVER PID: %d\n", pid);
+	ft_printf("SERVER PID: %d\n", pid);
 	while (true)
 		pause();
 	return (0);

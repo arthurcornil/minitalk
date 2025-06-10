@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/04/18 16:53:12 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/18 17:48:30 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
+#include <stdio.h>
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+void	*ft_realloc(void *ptr, size_t size)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	size_t	*curr_size;
+	void	*newptr;
+	size_t	i;
 
-int		ft_atoi(const char *str);
-
-#endif
+	if (!ptr)
+		return (ft_malloc(size));
+	curr_size = (size_t *)ptr - 1;
+	newptr = ft_malloc(size);
+	if (!newptr)
+		return (NULL);
+	i = 0;
+	while (i < size && i < *curr_size)
+	{
+		((unsigned char *)newptr)[i] = ((unsigned char *)ptr)[i];
+		i ++;
+	}
+	ft_free(ptr);
+	return (newptr);
+}

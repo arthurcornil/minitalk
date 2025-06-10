@@ -16,7 +16,7 @@
 
 volatile sig_atomic_t	g_bit_ack;
 
-bool	send_char(pid_t pid, char c)
+static void	send_char(pid_t pid, char c)
 {
 	size_t			i;
 	unsigned char	mask;	
@@ -32,13 +32,15 @@ bool	send_char(pid_t pid, char c)
 		else
 			ret = kill(pid, SIGUSR2);
 		if (ret < 0)
-			return (false);
+		{
+			ft_putstr_fd("Error: A bit could not reach the server.", 2);
+			exit(EXIT_FAILURE);
+		}
 		while (!g_bit_ack)
 			pause();
 		mask = mask >> 1;
 		i --;
 	}
-	return (true);
 }
 
 void	handle_ack(int sig)
@@ -46,10 +48,7 @@ void	handle_ack(int sig)
 	if (sig == SIGUSR1)
 		g_bit_ack = 1;
 	else
-	{
-		ft_putstr_fd(1, "The message was received by the server successfully.");
 		exit(EXIT_SUCCESS);
-	}
 }
 
 int	main(int argc, char **argv)
@@ -59,13 +58,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Usage: client [SERVER_PID] [MESSAGE]\n");
+		ft_printf("Usage: client [SERVER_PID] [MESSAGE]\n");
 		return (1);
 	}
 	server_pid = ft_atoi(argv[1]);
 	if (server_pid <= 0)
 	{
-		ft_putstr_fd(2, "Error: Invalid PID.\n");
+		ft_putstr_fd("Error: Invalid PID.\n", 2);
 		return (1);
 	}
 	sa.sa_handler = handle_ack;
@@ -75,18 +74,10 @@ int	main(int argc, char **argv)
 	sigaction(SIGUSR2, &sa, NULL);
 	while (*argv[2])
 	{	
-		if (!send_char(server_pid, *argv[2]))
-		{
-			ft_putstr_fd(2, "Error: The message couldn't reach the server in its entirety.\n");
-			return (1);
-		}
+		send_char(server_pid, *argv[2]);
 		argv[2]++;
 	}
-	if (!send_char(server_pid, '\0'))
-	{
-		ft_putstr_fd(2, "Error: The message couldn't reach the server in its entirety.\n");
-		return (1);
-	}
+	send_char(server_pid, '\0');
 	while(1)
 		pause();
 	return (0);

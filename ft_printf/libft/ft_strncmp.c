@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/03/27 08:38:13 by arcornil          #+#    #+#             */
+/*   Updated: 2025/03/27 08:44:29 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	size_t	i;
 
-int		ft_atoi(const char *str);
-
-#endif
+	i = 0;
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+		i ++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}

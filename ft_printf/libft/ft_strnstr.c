@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/03/27 10:01:38 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/10 15:13:07 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	size_t	i;
+	size_t	j;
 
-int		ft_atoi(const char *str);
-
-#endif
+	i = 0;
+	if (!*needle || (!haystack && !len))
+		return ((char *)haystack);
+	while (haystack[i] && i < len)
+	{
+		j = 0;
+		while (needle[j] && (i + j) < len && haystack[i + j] == needle[j])
+			j ++;
+		if (needle[j] == '\0')
+			return ((char *)haystack + i);
+		i ++;
+	}
+	return (NULL);
+}

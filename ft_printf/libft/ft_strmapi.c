@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/04/03 18:49:47 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/10 15:17:40 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	char			*str;
+	size_t			slen;
+	unsigned int	i;
 
-int		ft_atoi(const char *str);
-
-#endif
+	if (!s || !f)
+		return (NULL);
+	slen = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (slen + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = f(i, s[i]);
+		i ++;
+	}
+	str[i] = (char)0;
+	return (str);
+}

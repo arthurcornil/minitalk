@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_print_uint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/02/17 14:41:10 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/21 18:00:43 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../includes/ft_printf.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+static void	ft_putuint(unsigned int num, t_print *tab)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	unsigned int		factor;
+	char				digit;
 
-int		ft_atoi(const char *str);
+	factor = ft_get_factor(num);
+	while (factor != 0)
+	{
+		digit = (num / factor) + '0';
+		tab->length += write(1, &digit, 1);
+		num %= factor;
+		factor /= 10;
+	}
+}
 
-#endif
+void	ft_print_uint(t_print *tab)
+{
+	unsigned int	num;
+
+	num = va_arg(tab->args, unsigned int);
+	ft_putuint(num, tab);
+}

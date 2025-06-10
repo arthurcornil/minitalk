@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/04/03 20:58:50 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/03 21:00:43 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+int	ft_lstsize(t_list *lst)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	int	num_nodes;
 
-int		ft_atoi(const char *str);
-
-#endif
+	num_nodes = 0;
+	while (lst)
+	{
+		num_nodes ++;
+		lst = lst->next;
+	}
+	return (num_nodes);
+}

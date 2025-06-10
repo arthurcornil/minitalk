@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/02/17 14:40:54 by arcornil          #+#    #+#             */
+/*   Updated: 2025/03/10 14:35:47 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../includes/ft_printf.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+void	ft_print_str(t_print *tab)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	char	*str;
+	int		len;
 
-int		ft_atoi(const char *str);
-
-#endif
+	str = va_arg(tab->args, char *);
+	if (!str)
+		str = "(null)";
+	len = ft_strlen(str);
+	tab->length += len;
+	write(1, str, len);
+}

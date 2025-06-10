@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/04/21 18:19:10 by arcornil          #+#    #+#             */
+/*   Updated: 2025/05/08 10:27:27 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../includes/ft_printf.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+int	ft_printf(const char *format, ...)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	t_print	tab;
+	int		i;
 
-int		ft_atoi(const char *str);
-
-#endif
+	tab.length = 0;
+	va_start(tab.args, format);
+	i = 0;
+	while (format[i])
+	{
+		if (format[i] == '%')
+			i = ft_get_format(&tab, format, i + 1);
+		else
+			tab.length += write(1, (format + i), 1);
+		i ++;
+	}
+	va_end(tab.args);
+	return (tab.length);
+}

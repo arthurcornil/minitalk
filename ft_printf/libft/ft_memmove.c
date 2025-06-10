@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/03/27 08:07:29 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/10 13:25:52 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	unsigned char	*d;
+	unsigned char	*s;
+	size_t			i;
 
-int		ft_atoi(const char *str);
-
-#endif
+	if (!dst && !src)
+		return (NULL);
+	if (len == 0)
+		return (dst);
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	if (d > s && d < s + len)
+	{
+		while (len--)
+			d[len] = s[len];
+	}
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			d[i] = s[i];
+			i ++;
+		}
+	}
+	return (dst);
+}

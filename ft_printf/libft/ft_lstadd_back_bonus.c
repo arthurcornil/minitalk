@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcornil <arcornil@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 20:14:55 by arcornil          #+#    #+#             */
-/*   Updated: 2025/05/20 12:34:48 by arcornil         ###   ########.fr       */
+/*   Created: 2025/04/03 21:08:01 by arcornil          #+#    #+#             */
+/*   Updated: 2025/04/10 15:58:31 by arcornil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdbool.h>
-# include <signal.h>
-# include <limits.h>
-# include "ft_printf/includes/ft_printf.h"
-
-typedef struct s_byte
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	unsigned char	byte;
-	size_t			curr_bit;
-}	t_byte;
+	t_list	*p;
 
-int		ft_atoi(const char *str);
-
-#endif
+	if (!lst)
+		return ;
+	p = *lst;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	while (p->next)
+		p = p->next;
+	p->next = new;
+}
