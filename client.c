@@ -75,6 +75,7 @@ int	main(int argc, char **argv)
 	while (*argv[2])
 	{	
 		send_char(server_pid, *argv[2]);
+		usleep(10);
 		argv[2]++;
 	}
 	send_char(server_pid, '\0');
