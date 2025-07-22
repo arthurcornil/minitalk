@@ -16,9 +16,3 @@ The client encodes each character of a string into bits and sends them bit by bi
 The server decodes the bits and reconstructs the original message.
 
 ---
-
-## ⚙️ Usage
-
-1. **Build the project:**
-   ```bash
-   make
